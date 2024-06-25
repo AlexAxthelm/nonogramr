@@ -2,11 +2,13 @@ Package: nonogramr
 Title: Tools for nonograms
 Version: 0.0.0.9000
 Authors@R: 
-      person(given = "Alex",
-             family = "Axthelm",
-             role = c("aut", "cre", "ctr"),
-             email = "nonogramr@AlexAxthelm.com",
-             comment = c(ORCID = "0000-0001-8579-8565")),
+      person(
+        given = "Alex",
+        family = "Axthelm",
+        role = c("aut", "cre", "ctr"),
+        email = "nonogramr@AlexAxthelm.com",
+        comment = c(ORCID = "0000-0001-8579-8565")
+      )
 Description: Tools for solving nonogram puzzles in R.
 License: MIT + file LICENSE
 Encoding: UTF-8
