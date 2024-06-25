@@ -43,3 +43,12 @@ S7::method(plot, grid) <- function(grid) {
     ) +
     ggplot2::theme(legend.position = "none")
 }
+
+mark <- S7::new_generic("mark", "grid")
+S7::method(mark, grid) <- function(grid, x, y, color) {
+  log_debug("Marking cell ({x}, {y}) as {color}.")
+  browser()
+  foo <- grid@cells
+  foo[[foo$x == x & foo$y == y, "color"]] <- color
+  grid@cells[[grid@cells$x == x & grid@cells$y == y, "color"]] <- color
+}
