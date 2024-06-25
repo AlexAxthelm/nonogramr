@@ -5,9 +5,9 @@ grid <- S7::new_class("grid",
     cells = S7::class_data.frame
   ),
   constructor = function(width, height, cells) {
-    log_debug("creating grid")
+    log_debug("Creating grid.")
     if (missing(cells)) {
-      log_debug("creating empty cells")
+      log_debug("Filling grid with empty cells.")
       cells <- data.frame(
         x = rep(seq(from = 1L, to = width), times = height),
         y = rep(seq(from = 1L, to = height), each = width),
@@ -20,7 +20,7 @@ grid <- S7::new_class("grid",
 
 plot <- S7::new_generic("plot", "grid")
 S7::method(plot, grid) <- function(grid) {
-  log_debug("plotting grid")
+  log_debug("Plotting grid.")
   ggplot2::ggplot(
     data = grid@cells,
     mapping = ggplot2::aes(
