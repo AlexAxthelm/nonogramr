@@ -21,3 +21,5 @@ jobs:
     name: R Package Checks
     uses: RMI-PACTA/actions/.github/workflows/R.yml@main
     secrets: inherit
+    with:
+      do-codecov: false
