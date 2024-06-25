@@ -16,6 +16,8 @@ on:
 
 name: R
 
+permissions: read-all
+
 jobs:
   R-package:
     name: R Package Checks
