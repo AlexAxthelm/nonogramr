@@ -1,29 +1,32 @@
 grid <- S7::new_class("grid",
   properties = list(
-    width = class_integer,
-    height = class_integer,
-    cells = class_data.frame
+    width = S7::class_integer,
+    height = S7::class_integer,
+    cells = S7::class_data.frame
   ),
   constructor = function(width, height, cells) {
+    log_debug("creating grid")
     if (missing(cells)) {
+      log_debug("creating empty cells")
       cells <- data.frame(
         x = rep(seq(from = 1L, to = width), times = height),
         y = rep(seq(from = 1L, to = height), each = width),
         color = rep(NA_integer_, times = width * height)
       )
     }
-    new_object(S7_object, width = width, height = height, cells = cells)
+    S7::new_object(S7::S7_object, width = width, height = height, cells = cells)
   }
 )
 
 plot <- S7::new_generic("plot", "grid")
 S7::method(plot, grid) <- function(grid) {
+  log_debug("plotting grid")
   ggplot2::ggplot(
     data = grid@cells,
     mapping = ggplot2::aes(
-      x = x,
-      y = y,
-      fill = color
+      x = .data[["x"]],
+      y = .data[["y"]],
+      fill = .data[["color"]]
     )
   ) +
     ggplot2::geom_tile(width = 1L, height = 1L) +
