@@ -61,6 +61,6 @@ mark <- S7::new_generic("mark", "z")
 S7::method(mark, grid) <- function(z, x, y, color) {
   log_debug("Marking cell ({x}, {y}) as {color}.")
   index <- which(z@cells[["x"]] == x & z@cells[["y"]] == y)
-  z@cells[["color"]][[index]] <- color
+  z@cells[["color"]][[index]] <- as.integer(color)
   z
 }
