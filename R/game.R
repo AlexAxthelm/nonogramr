@@ -20,8 +20,8 @@ game <- S7::new_class("game",
   },
   validator = function(self) {
     if (!identical(self@solution@width, self@state@width) ||
-        !identical(self@solution@height, self@state@height)) {
+          !identical(self@solution@height, self@state@height)) {
       stop("solution and state must have the same dimensions")
-    } 
-  },
+    }
+  }
 )
