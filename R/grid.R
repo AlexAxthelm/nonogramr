@@ -5,7 +5,10 @@ grid <- S7::new_class("grid",
     cells = S7::class_data.frame
   ),
   constructor = function(width, height, cells) {
-    log_debug("Creating grid.")
+    log_trace("Casting length and height to integer.")
+    width <- as.integer(width)
+    height <- as.integer(height)
+    log_debug("Creating {width} by {height} grid.")
     if (missing(cells)) {
       log_debug("Filling grid with empty cells.")
       cells <- data.frame(
@@ -14,7 +17,13 @@ grid <- S7::new_class("grid",
         color = rep(NA_integer_, times = width * height)
       )
     }
-    S7::new_object(S7::S7_object, width = width, height = height, cells = cells)
+    logger::log_trace("Creating S7 grid object.")
+    S7::new_object(
+      S7::S7_object(),
+      width = width,
+      height = height,
+      cells = cells
+    )
   }
 )
 
@@ -44,11 +53,10 @@ S7::method(plot, grid) <- function(grid) {
     ggplot2::theme(legend.position = "none")
 }
 
-mark <- S7::new_generic("mark", "grid")
-S7::method(mark, grid) <- function(grid, x, y, color) {
+mark <- S7::new_generic("mark", "z")
+S7::method(mark, grid) <- function(z, x, y, color) {
   log_debug("Marking cell ({x}, {y}) as {color}.")
-  browser()
-  foo <- grid@cells
-  foo[[foo$x == x & foo$y == y, "color"]] <- color
-  grid@cells[[grid@cells$x == x & grid@cells$y == y, "color"]] <- color
+  index <- which(z@cells[["x"]] == x & z@cells[["y"]] == y)
+  z@cells[["color"]][[index]] <- color
+  z
 }
