@@ -87,4 +87,25 @@ plot(empty_grid)
 
 plot(testing_grid_s7)
 
+# -------------------------
 
+library("S7")
+
+my_class <- new_class("my_class",
+  properties = list(
+    llama = class_list
+  )
+)
+
+foo <- my_class(list(x = 1:3, y = 4:6))
+foo
+
+foo@llama[["y"]][[2]] <- 10
+
+update_list <- new_generic("update_list", "my_class")
+method(update_list, my_class) <- function(my_class, position, value) {
+  my_class@llama[["y"]][[position]] <- value
+  my_class
+}
+
+foo <- update_list(foo, 1, 30)
