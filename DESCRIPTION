@@ -27,3 +27,5 @@ Collate:
     'game.R'
     'nonogramr-package.R'
     'zzz.R'
+Suggests: 
+    usethis
