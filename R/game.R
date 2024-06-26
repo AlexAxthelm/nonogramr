@@ -30,7 +30,7 @@ S7::method(mark, game) <- function(z, x, y, color, plot = TRUE) {
   index <- which(z@state@cells[["x"]] == x & z@state@cells[["y"]] == y)
   z@state@cells[["color"]][[index]] <- color
   if (plot) {
-    plot(z@state)
+    print(z@state@plot)
   }
   z
 }

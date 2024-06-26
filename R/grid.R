@@ -2,7 +2,12 @@ grid <- S7::new_class("grid",
   properties = list(
     width = S7::class_integer,
     height = S7::class_integer,
-    cells = S7::class_data.frame
+    cells = S7::class_data.frame,
+    plot = S7::new_property(
+      getter = function(self) {
+        plot_cells(self)
+      }
+    )
   ),
   constructor = function(width, height, cells) {
     log_trace("Casting length and height to integer.")
@@ -27,19 +32,18 @@ grid <- S7::new_class("grid",
   }
 )
 
-plot <- S7::new_generic("plot", "grid")
-S7::method(plot, grid) <- function(grid) {
+plot_cells <- function(grid) {
   log_debug("Plotting grid.")
   ggplot2::ggplot(
     data = grid@cells,
     mapping = ggplot2::aes(
       x = .data[["x"]],
       y = .data[["y"]],
-      fill = .data[["color"]]
+      fill = as.character(.data[["color"]])
     )
   ) +
     ggplot2::geom_tile(width = 1L, height = 1L) +
-    ggplot2::scale_fill_gradient(low = "white", high = "black") +
+    ggplot2::scale_fill_manual(values = c("0" = "white", "1" = "black")) +
     ggplot2::theme_void() +
     ggplot2::coord_fixed() +
     ggplot2::geom_vline(
