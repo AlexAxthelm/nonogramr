@@ -13,7 +13,7 @@ game <- S7::new_class("game",
   ),
   constructor = function(solution) {
     S7::new_object(
-      S7::S7_object,
+      S7::S7_object(),
       solution = solution,
       state = grid(width = solution@width, height = solution@height)
     )
