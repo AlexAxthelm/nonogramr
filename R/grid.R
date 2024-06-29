@@ -46,21 +46,13 @@ plot_cells <- function(grid) {
     ggplot2::scale_fill_manual(values = c("0" = "white", "1" = "black")) +
     ggplot2::theme_void() +
     ggplot2::coord_fixed() +
-    ggplot2::geom_vline(
-      xintercept = seq(0.5, grid@width + 0.5, by = 1L),
-      color = "grey75"
-    ) +
-    ggplot2::geom_hline(
-      yintercept = seq(0.5, grid@height + 0.5, by = 1L),
-      color = "grey75"
-    ) +
     ggplot2::theme(legend.position = "none")
 }
 
 mark <- S7::new_generic("mark", "z")
 S7::method(mark, grid) <- function(z, x, y, color) {
   log_debug("Marking cell ({x}, {y}) as {color}.")
-  index <- which(z@cells[["x"]] == x & z@cells[["y"]] == y)
-  z@cells[["color"]][[index]] <- as.integer(color)
-  z
+  index <- which(z@cells[["x"]] %in% x & z@cells[["y"]] %in% y)
+  z@cells[["color"]][index] <- as.integer(color)
+  invisible(z)
 }
