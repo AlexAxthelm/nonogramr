@@ -16,4 +16,3 @@
 #' A simple  asymmetric sample puzzle to show how the package works.
 #' Hint: it's block text Hi! in a minimal piizel font
 "hi_puzzle"
-
