@@ -52,7 +52,7 @@ hi_puzzle <- puzzle(
     width = 9L,
     height = 5L,
     cells = puzzle_cells
-    ),
+  ),
   clues = puzzle_clues,
   puzzle_source = "nonogramr package",
   title = "HI!",

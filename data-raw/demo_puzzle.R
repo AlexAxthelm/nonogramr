@@ -20,12 +20,12 @@ demo_puzzle_cells <- data.frame(
 )
 
 demo_clues <- clues(
-  rows = list(3, 1, 1),
-  columns = list(1, c(1,1), 2)
+  rows = list(3L, 1L, 1L),
+  columns = list(1L, c(1L, 1L), 2L)
 )
 
 demo_puzzle <- puzzle(
-  solution = grid(3, 3, cells = demo_puzzle_cells),
+  solution = grid(3L, 3L, cells = demo_puzzle_cells),
   clues = demo_clues,
   puzzle_source = "nonogramr package",
   title = "Glider",

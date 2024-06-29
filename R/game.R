@@ -55,7 +55,7 @@ plot_game <- function(self) {
           y = .data[["y"]],
           label = .data[["label"]],
           fill = NULL
-          ),
+        )
       )
     logger::log_trace("Adding gridlines.")
     game_plot <- game_plot +
@@ -66,7 +66,7 @@ plot_game <- function(self) {
         y = 0.5,
         yend = self@state@height + 0.5,
         color = "grey75"
-        ) +
+      ) +
       ggplot2::annotate(
         geom = "segment",
         x = 0.5,
@@ -76,23 +76,23 @@ plot_game <- function(self) {
         color = "grey75"
       )
 
-      logger::log_trace("Adding coordinate labels.")
-      game_plot <- game_plot +
-        ggplot2::annotate(
-          geom = "text",
-          x = self@state@width + 0.75,
-          y = seq(1L, self@state@height, by = 1L),
-          label = seq(1L, self@state@height, by = 1L),
-          color = "grey75"
-        )
-      game_plot <- game_plot +
-        ggplot2::annotate(
-          geom = "text",
-          x = seq(1L, self@state@width, by = 1L),
-          y = self@state@height + 0.75,
-          label = seq(1L, self@state@width, by = 1L),
-          color = "grey75"
-        )
+    logger::log_trace("Adding coordinate labels.")
+    game_plot <- game_plot +
+      ggplot2::annotate(
+        geom = "text",
+        x = self@state@width + 0.75,
+        y = seq(1L, self@state@height, by = 1L),
+        label = seq(1L, self@state@height, by = 1L),
+        color = "grey75"
+      )
+    game_plot <- game_plot +
+      ggplot2::annotate(
+        geom = "text",
+        x = seq(1L, self@state@width, by = 1L),
+        y = self@state@height + 0.75,
+        label = seq(1L, self@state@width, by = 1L),
+        color = "grey75"
+      )
 
   }
 
