@@ -29,8 +29,8 @@ demo_puzzle <- puzzle(
   clues = demo_clues,
   puzzle_source = "nonogramr package",
   title = "Glider",
-  author = "Alex Axthelm",
-  copyright = "Richard Guy",
+  author = "Alex Axthelm (original by Richard Guy)",
+  copyright = "Alex Axthelm, 2024, Richard Guy 1969",
   license = "MIT",
   description = "Glider from Conway's Game of Life"
 )
