@@ -1,3 +1,6 @@
+# include for collation
+#' @include puzzle.R
+
 #' Demo puzzle
 #'
 #' A simple sample puzzle to show how the package works.

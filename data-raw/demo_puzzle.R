@@ -19,6 +19,22 @@ demo_puzzle_cells <- data.frame(
   )
 )
 
-demo_puzzle <- grid(3L, 3L, demo_puzzle_cells)
+demo_clues <- clues(
+  rows = list(3, 1, 1),
+  columns = list(1, c(1,1), 2)
+)
+
+
+
+demo_puzzle <- puzzle(
+  solution = grid(3, 3, cells = demo_puzzle_cells),
+  clues = demo_clues,
+  puzzle_source = "nonogramr package",
+  title = "Glider",
+  author = "Alex Axthelm",
+  copyright = "Richard Guy",
+  license = "MIT",
+  description = "Glider from Conway's Game of Life"
+)
 
 usethis::use_data(demo_puzzle, overwrite = TRUE)
