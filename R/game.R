@@ -8,49 +8,11 @@ plot_game <- function(self) {
   logger::log_trace("Getting game state plot.")
   game_plot <- self@state@plot
 
-  logger::log_trace("Adding puzzle metadata to plot.")
   if (self@solved) {
     title <- self@puzzle@title
   } else {
     title <- "[Not solved]"
-  }
-  game_plot <- game_plot +
-    ggplot2::labs(
-      title = title,
-      subtitle = paste("By", self@puzzle@author),
-      caption = paste(
-        "Source:", self@puzzle@puzzle_source, "/",
-        "Copyright:", self@puzzle@copyright, "/",
-        "License:", self@puzzle@license
-      )
-    ) +
-    ggplot2::theme(
-      plot.title = ggplot2::element_text(face = "bold", hjust = 0.5),
-      plot.subtitle = ggplot2::element_text(face = "italic", hjust = 0.5),
-      plot.caption = ggplot2::element_text(
-        margin = ggplot2::margin(
-          t = 2L,
-          r = 2L,
-          b = 2L,
-          l = 2L
-        )
-      )
-    )
 
-
-
-  if (self@solved) {
-    logger::log_info("Adding 'Solved!' label.")
-    game_plot <- game_plot +
-      ggplot2::annotate(
-        geom = "label",
-        x = (0.5 * self@state@width) + 0.5,
-        y = (0.5 * self@state@height) + 0.5,
-        label = "Solved!",
-        size = 10L,
-        color = "black"
-      )
-  } else {
     logger::log_debug("Adding clues to plot.")
 
     logger::log_trace("Preparing line labels.")
@@ -133,6 +95,30 @@ plot_game <- function(self) {
         )
 
   }
+
+  logger::log_trace("Adding puzzle metadata to plot.")
+  game_plot <- game_plot +
+    ggplot2::labs(
+      title = title,
+      subtitle = paste("By", self@puzzle@author),
+      caption = paste(
+        "Source:", self@puzzle@puzzle_source, "/",
+        "Copyright:", self@puzzle@copyright, "/",
+        "License:", self@puzzle@license
+      )
+    ) +
+    ggplot2::theme(
+      plot.title = ggplot2::element_text(face = "bold", hjust = 0.5),
+      plot.subtitle = ggplot2::element_text(face = "italic", hjust = 0.5),
+      plot.caption = ggplot2::element_text(
+        margin = ggplot2::margin(
+          t = 2L,
+          r = 2L,
+          b = 2L,
+          l = 2L
+        )
+      )
+    )
 
   logger::log_trace("Returning game plot.")
   return(game_plot)
