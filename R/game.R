@@ -37,50 +37,6 @@ plot_game <- function(self) {
       )
     )
 
-  logger::log_debug("Adding clues to plot.")
-
-  logger::log_trace("Preparing line labels.")
-  line_labels_df <- data.frame()
-  for (i in seq_along(self@clues@rows)) {
-    # Note we're working backwards here
-    row_labels <- rev(self@clues@rows[[i]])
-    x_pos <- seq(from = 0.25, by = -0.25, length.out = length(row_labels))
-    y_pos <- rep(i, length(row_labels))
-    line_labels_df <- rbind(
-      line_labels_df,
-      data.frame(
-        x = x_pos,
-        y = y_pos,
-        label = row_labels
-      )
-    )
-  }
-  for (i in seq_along(self@clues@columns)) {
-    # Note we're working backwards here
-    column_labels <- rev(self@clues@columns[[i]])
-    x_pos <- rep(i, length(column_labels))
-    y_pos <- seq(from = 0.25, by = -0.25, length.out = length(column_labels))
-    line_labels_df <- rbind(
-      line_labels_df,
-      data.frame(
-        x = x_pos,
-        y = y_pos,
-        label = column_labels
-      )
-    )
-  }
-
-  logger::log_trace("Adding line labels to plot.")
-  game_plot <- game_plot +
-    ggplot2::geom_text(
-      data = line_labels_df,
-      mapping = ggplot2::aes(
-        x = .data[["x"]],
-        y = .data[["y"]],
-        label = .data[["label"]],
-        fill = NULL
-      ),
-    )
 
 
   if (self@solved) {
@@ -95,6 +51,50 @@ plot_game <- function(self) {
         color = "black"
       )
   } else {
+    logger::log_debug("Adding clues to plot.")
+
+    logger::log_trace("Preparing line labels.")
+    line_labels_df <- data.frame()
+    for (i in seq_along(self@clues@rows)) {
+      # Note we're working backwards here
+      row_labels <- rev(self@clues@rows[[i]])
+      x_pos <- seq(from = 0.25, by = -0.25, length.out = length(row_labels))
+      y_pos <- rep(i, length(row_labels))
+      line_labels_df <- rbind(
+        line_labels_df,
+        data.frame(
+          x = x_pos,
+          y = y_pos,
+          label = row_labels
+        )
+      )
+    }
+    for (i in seq_along(self@clues@columns)) {
+      # Note we're working backwards here
+      column_labels <- rev(self@clues@columns[[i]])
+      x_pos <- rep(i, length(column_labels))
+      y_pos <- seq(from = 0.25, by = -0.25, length.out = length(column_labels))
+      line_labels_df <- rbind(
+        line_labels_df,
+        data.frame(
+          x = x_pos,
+          y = y_pos,
+          label = column_labels
+        )
+      )
+    }
+
+    logger::log_trace("Adding line labels to plot.")
+    game_plot <- game_plot +
+      ggplot2::geom_text(
+        data = line_labels_df,
+        mapping = ggplot2::aes(
+          x = .data[["x"]],
+          y = .data[["y"]],
+          label = .data[["label"]],
+          fill = NULL
+          ),
+      )
     logger::log_trace("Adding gridlines.")
     game_plot <- game_plot +
       ggplot2::annotate(
@@ -104,7 +104,7 @@ plot_game <- function(self) {
         y = 0.5,
         yend = self@state@height + 0.5,
         color = "grey75"
-      ) +
+        ) +
       ggplot2::annotate(
         geom = "segment",
         x = 0.5,
@@ -112,7 +112,7 @@ plot_game <- function(self) {
         y = seq(0.5, self@state@height + 0.5, by = 1L),
         yend = seq(0.5, self@state@height + 0.5, by = 1L),
         color = "grey75"
-        )
+      )
 
       logger::log_trace("Adding coordinate labels.")
       game_plot <- game_plot +
