@@ -4,14 +4,37 @@
 
 
 plot_game <- function(self) {
+
+  logger::log_trace("Getting game state plot.")
+  game_plot <- self@state@plot
+
+  logger::log_trace("Adding puzzle metadata to plot.")
   if (self@solved) {
     title <- self@puzzle@title
   } else {
     title <- "[Not solved]"
   }
-  game_plot <- self@state@plot +
+  game_plot <- game_plot +
     ggplot2::labs(
-      title = title
+      title = title,
+      subtitle = paste("By", self@puzzle@author),
+      caption = paste(
+        "Source:", self@puzzle@puzzle_source, "/",
+        "Copyright:", self@puzzle@copyright, "/",
+        "License:", self@puzzle@license
+      )
+    ) +
+    ggplot2::theme(
+      plot.title = ggplot2::element_text(face = "bold", hjust = 0.5),
+      plot.subtitle = ggplot2::element_text(face = "italic", hjust = 0.5),
+      plot.caption = ggplot2::element_text(
+        margin = ggplot2::margin(
+          t = 2L,
+          r = 2L,
+          b = 2L,
+          l = 2L
+        )
+      )
     )
 
   logger::log_debug("Adding clues to plot.")
