@@ -12,6 +12,6 @@ puzzle <- S7::new_class("puzzle",
     author = S7::class_character,
     copyright = S7::class_character,
     license = S7::class_character,
-    descriptio = S7::class_character
+    description = S7::class_character
   )
 )

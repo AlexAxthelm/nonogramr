@@ -24,8 +24,6 @@ demo_clues <- clues(
   columns = list(1, c(1,1), 2)
 )
 
-
-
 demo_puzzle <- puzzle(
   solution = grid(3, 3, cells = demo_puzzle_cells),
   clues = demo_clues,
