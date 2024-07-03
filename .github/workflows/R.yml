@@ -24,7 +24,7 @@ jobs:
     uses: RMI-PACTA/actions/.github/workflows/R.yml@main
     secrets: inherit
     with:
-      default: |
+      r-cmd-check-matrix: |
         [
           {"os": "macOS-latest", "r": "release"},
           {"os": "windows-latest", "r": "release"},
@@ -44,3 +44,11 @@ jobs:
         daroczig/logger
         r-lib/rlang
         RConsortium/S7
+      r-cmd-check-matrix: |
+        [
+          {"os": "macOS-latest", "r": "release"},
+          {"os": "windows-latest", "r": "release"},
+          {"os": "ubuntu-latest", "r": "release"},
+          {"os": "ubuntu-latest", "r": "devel", "http-user-agent": "release"},
+          {"os": "ubuntu-latest", "r": "oldrel-1"}
+        ]
