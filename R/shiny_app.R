@@ -6,14 +6,16 @@ nonogramr_shiny <- function(puzzle = hi_puzzle) {
     if (is.null(e)) {
       return(NULL)
     }
-    if (
-      e[["x"]] < 0.5 || e[["x"]] > (mygame@state@width + 0.5) ||
-        e[["y"]] < 0.5 || e[["y"]] > (mygame@state@height + 0.5)
-    ) {
-      return(NULL)
+    if (e[["x"]] < 0.5 || e[["x"]] > (mygame@state@width + 0.5)) {
+      x <- NA_integer_
+    } else {
+      x <- as.integer(round(e[["x"]], 0L))
     }
-    x <- as.integer(round(e[["x"]], 0L))
-    y <- as.integer(round(e[["y"]], 0L))
+    if (e[["y"]] < 0.5 || e[["y"]] > (mygame@state@height + 0.5)) {
+      y <- NA_integer_
+    } else {
+      y <- as.integer(round(e[["y"]], 0L))
+    }
     list(x = x, y = y)
   }
 
@@ -24,23 +26,34 @@ nonogramr_shiny <- function(puzzle = hi_puzzle) {
 
   server <- function(input, output, session) {
 
-    mygame <- game(puzzle, print = FALSE)
+    mygame <- shiny::reactiveVal(
+      game(puzzle, print = FALSE)
+    )
+
+    shiny::observeEvent(
+      input[["plot_click"]],
+      {
+        cell <- find_cell(input[["plot_click"]], mygame())
+        logger::log_debug("cell_found: {cell}")
+        mygame(cycle_mark(mygame(), x = cell[["x"]], y = cell[["y"]]))
+      }
+    )
 
     output[["plot"]] <- shiny::renderPlot({
-      mygame@plot
+      mygame()@plot
 
     })
 
     output[["info"]] <- shiny::renderText({
       cell_string <- function(e) {
-        cell <- find_cell(e, mygame)
+        cell <- find_cell(e, mygame())
         if (is.null(cell)) {
           return("NULL\n")
         }
         paste0(
           "x=", round(cell[["x"]], 2L), "\n",
           "y=", round(cell[["y"]], 2L), "\n",
-          "value=", cell_value(mygame, x = cell[["x"]], y = cell[["y"]]), "\n"
+          "value=", cell_value(mygame(), x = cell[["x"]], y = cell[["y"]]), "\n"
         )
 
       }
