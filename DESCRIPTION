@@ -1,14 +1,34 @@
 Package: nonogramr
 Title: Tools for nonograms
-Version: 0.0.0.9000
+Version: 0.0.1
 Authors@R: 
-      person(given = "Alex",
-             family = "Axthelm",
-             role = c("aut", "cre", "ctr"),
-             email = "nonogramr@AlexAxthelm.com",
-             comment = c(ORCID = "0000-0001-8579-8565")),
+      person(
+        given = "Alex",
+        family = "Axthelm",
+        role = c("aut", "cre", "ctr"),
+        email = "nonogramr@AlexAxthelm.com",
+        comment = c(ORCID = "0000-0001-8579-8565")
+      )
 Description: Tools for solving nonogram puzzles in R.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2
+Imports: 
+    ggplot2,
+    logger,
+    rlang,
+    S7
+Depends: 
+    R (>= 2.10)
+LazyData: true
+Collate: 
+    'clues.R'
+    'grid.R'
+    'puzzle.R'
+    'datasets.R'
+    'game.R'
+    'nonogramr-package.R'
+    'zzz.R'
+Suggests: 
+    usethis

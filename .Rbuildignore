@@ -1,1 +1,5 @@
+.github/
+^.lintr$
 ^LICENSE\.md$
+^data-raw$
+try_s7.R
