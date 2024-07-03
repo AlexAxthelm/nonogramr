@@ -139,7 +139,7 @@ game <- S7::new_class("game",
       getter = plot_game
     )
   ),
-  constructor = function(puzzle) {
+  constructor = function(puzzle, print = TRUE) {
     obj <- S7::new_object(
       S7::S7_object(),
       puzzle = puzzle,
@@ -149,7 +149,10 @@ game <- S7::new_class("game",
       ),
       clues = puzzle@clues
     )
-    print(obj@plot)
+    if (print) {
+      logger::log_trace("Printing game plot from constructor.")
+      print(obj@plot)
+    }
     return(obj)
   },
   validator = function(self) {
@@ -166,4 +169,9 @@ S7::method(mark, game) <- function(z, x, y, color, plot = TRUE) {
     print(z@plot)
   }
   invisible(z)
+}
+
+S7::method(cell_value, game) <- function(z, x, y) {
+  logger::log_trace("Getting cell value.")
+  cell_value(z@state, x = x, y = y)
 }

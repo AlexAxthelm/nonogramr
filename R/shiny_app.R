@@ -24,7 +24,7 @@ nonogramr_shiny <- function(puzzle = hi_puzzle) {
 
   server <- function(input, output, session) {
 
-    mygame <- game(puzzle)
+    mygame <- game(puzzle, print = FALSE)
 
     output[["plot"]] <- shiny::renderPlot({
       mygame@plot
@@ -39,7 +39,8 @@ nonogramr_shiny <- function(puzzle = hi_puzzle) {
         }
         paste0(
           "x=", round(cell[["x"]], 2L), "\n",
-          "y=", round(cell[["y"]], 2L), "\n"
+          "y=", round(cell[["y"]], 2L), "\n",
+          "value=", cell_value(mygame, x = cell[["x"]], y = cell[["y"]]), "\n"
         )
 
       }

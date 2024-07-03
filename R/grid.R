@@ -56,3 +56,10 @@ S7::method(mark, grid) <- function(z, x, y, color) {
   z@cells[["color"]][index] <- as.integer(color)
   invisible(z)
 }
+
+cell_value <- S7::new_generic("cell_value", "z")
+S7::method(cell_value, grid) <- function(z, x, y) {
+  log_debug("Getting value of cell ({x}, {y}).")
+  index <- which((z@cells[["x"]] %in% x) & (z@cells[["y"]] %in% y))
+  z@cells[["color"]][index]
+}
