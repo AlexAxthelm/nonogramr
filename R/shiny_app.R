@@ -1,7 +1,7 @@
 # https://stackoverflow.com/a/30808472
 #' @include puzzle.R
 
-nonogramr_shiny <- function(puzzle = hi_puzzle) {
+nonogramr_shiny <- function(puzzle) {
 
   find_cell <- function(e, mygame = mygame) {
     if (is.null(e)) {

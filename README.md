@@ -19,6 +19,8 @@ An interactive Shiny application provides an interface for the game.
 ```r
 library(nonogramr)
 nonogramr_shiny(demo_puzzle)
+# or
+nonogramr_shiny(hi_puzzle)
 ```
 
 Click a cell to cycle colors through marking as black, white, or unmarked.
