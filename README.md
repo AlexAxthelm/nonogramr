@@ -12,7 +12,24 @@ pak::pak("AlexAxthelm/nonogramr")
 
 ## Usage Demonstration
 
+### Shiny app
+
+An interactive Shiny application provides an interface for the game.
+
 ```r
+library(nonogramr)
+nonogramr_shiny(demo_puzzle)
+```
+
+Click a cell to cycle colors through marking as black, white, or unmarked.
+
+### R Console/Script
+
+The game can also be run and controlled from the R console or an Rscript.
+
+```r
+library(nonogramr)
+
 mygame <- game(demo_puzzle)
 
 # Specify color = 1 for black cells, and 0 for white cells
