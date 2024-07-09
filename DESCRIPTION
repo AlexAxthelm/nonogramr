@@ -18,7 +18,8 @@ Imports:
     ggplot2,
     logger,
     rlang,
-    S7
+    S7,
+    shiny
 Depends: 
     R (>= 2.10)
 LazyData: true
@@ -27,8 +28,10 @@ Collate:
     'grid.R'
     'puzzle.R'
     'datasets.R'
+    'datasets2.R'
     'game.R'
     'nonogramr-package.R'
+    'shiny_app.R'
     'zzz.R'
 Suggests: 
     usethis

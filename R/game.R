@@ -139,7 +139,7 @@ game <- S7::new_class("game",
       getter = plot_game
     )
   ),
-  constructor = function(puzzle) {
+  constructor = function(puzzle, print = TRUE) {
     obj <- S7::new_object(
       S7::S7_object(),
       puzzle = puzzle,
@@ -149,7 +149,10 @@ game <- S7::new_class("game",
       ),
       clues = puzzle@clues
     )
-    print(obj@plot)
+    if (print) {
+      logger::log_trace("Printing game plot from constructor.")
+      print(obj@plot)
+    }
     return(obj)
   },
   validator = function(self) {
@@ -165,5 +168,26 @@ S7::method(mark, game) <- function(z, x, y, color, plot = TRUE) {
   if (plot) {
     print(z@plot)
   }
+  invisible(z)
+}
+
+S7::method(cell_value, game) <- function(z, x, y) {
+  logger::log_trace("Getting cell value.")
+  cell_value(z@state, x = x, y = y)
+}
+
+cycle_mark <- S7::new_generic("cycle_mark", "z")
+S7::method(cycle_mark, game) <- function(z, x, y) {
+  log_debug("Cycling cell ({x}, {y}).")
+  current_color <- cell_value(z, x = x, y = y)
+  log_trace("Current color: {current_color}")
+  if (is.na(current_color)) {
+    new_color <- 1L
+  } else if (current_color == 1L) {
+    new_color <- 0L
+  } else {
+    new_color <- NA_integer_
+  }
+  z <- mark(z, x = x, y = y, color = new_color)
   invisible(z)
 }
