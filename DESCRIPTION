@@ -29,6 +29,7 @@ Collate:
     'datasets.R'
     'game.R'
     'nonogramr-package.R'
+    'shiny_app.R'
     'zzz.R'
 Suggests: 
     usethis
