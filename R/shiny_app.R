@@ -1,4 +1,5 @@
 # https://stackoverflow.com/a/30808472
+#' @include puzzle.R
 
 nonogramr_shiny <- function(puzzle = hi_puzzle) {
 
@@ -35,7 +36,11 @@ nonogramr_shiny <- function(puzzle = hi_puzzle) {
       {
         cell <- find_cell(input[["plot_click"]], mygame())
         logger::log_debug("cell_found: {cell}")
-        mygame(cycle_mark(mygame(), x = cell[["x"]], y = cell[["y"]]))
+        if (anyNA(cell)) {
+          log_debug("Cell out of bounds: {cell}")
+        } else {
+          mygame(cycle_mark(mygame(), x = cell[["x"]], y = cell[["y"]]))
+        }
       }
     )
 
