@@ -1,6 +1,6 @@
 Package: nonogramr
 Title: Tools for nonograms
-Version: 0.0.1
+Version: 0.0.1.9000
 Authors@R: 
       person(
         given = "Alex",
@@ -28,7 +28,6 @@ Collate:
     'grid.R'
     'puzzle.R'
     'datasets.R'
-    'datasets2.R'
     'game.R'
     'nonogramr-package.R'
     'shiny_app.R'
